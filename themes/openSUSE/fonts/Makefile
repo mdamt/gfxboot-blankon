@@ -13,6 +13,7 @@ fonts: 16x16.fnt
 16x16.fnt: ../po/en.tr ../src/main.log
 	cat ../po/*.tr ../help-*/*/*.html >tmp.txt
 	$(GFXBOOT_FONT) -v -l 18 \
+    -p ./ \
 	-a 0x2022-0x2023 \
 	-c ISO-8859-15 -c ISO-8859-2 -c koi8-r \
 	`$(KEYMAPCHARS) ../keymaps/keymap.*.inc` \
@@ -30,9 +31,9 @@ fonts: 16x16.fnt
 	-f Loma:size=13:c=0x0e01-0x0e7f:bold=0:dy=0 \
 	-f Loma:size=17:c=0x0e81-0x0eff:bold=0:dy=-2 \
 	-f KhmerOS_sys:size=16:c=0x1780-0x17f9:dy=-2 \
-	-f DejaVuSans-Bold:size=14 \
 	-f FZHeiTi:size=17:nobitmap=1:autohint=1 \
 	-f gulim:size=17:bold=1:nobitmap=1:autohint=1 \
+	-f ombilin:size=14 \
 	16x16.fnt >16x16.fnt.log
 	rm -f tmp.txt
 

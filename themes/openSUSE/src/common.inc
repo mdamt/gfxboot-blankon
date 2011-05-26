@@ -1205,7 +1205,7 @@
   /menu.bar.width menu.bar.min.width def
 
   % false: no boot options line initially
-  /boot.show true def
+  /boot.show false def
 
 } def
 
@@ -1229,11 +1229,11 @@
     moveto setcolor
   } if
 
-  dup keyF8 eq syslinux and {
-    kroete.file .undef eq { /kroete.file "kroete.dat" findfile def } if
-    kroete.file kroete.dir idle
-    /kroete.dir kroete.dir 1 xor def
-  } if
+%  dup keyF8 eq syslinux and {
+%    kroete.file .undef eq { /kroete.file "kroete.dat" findfile def } if
+%    kroete.file kroete.dir idle
+%    /kroete.dir kroete.dir 1 xor def
+%  } if
 
   dup keyF9 eq syslinux and {
     /v_impaired inc
@@ -1626,6 +1626,7 @@ config.livecd {
 /config.screen.width
 /config.screen.height  "screen.size"            800 600 gfxconfig.set.int2
 /config.background     "background"          "back.jpg" gfxconfig.set.str
+/config.menubackground     "menubackground"          "menu.jpg" gfxconfig.set.str
 /config.font.normal    "font.normal"        "16x16.fnt" gfxconfig.set.str
 /config.font.large     "font.large"         "16x16.fnt" gfxconfig.set.str
 /config.restore.title  "restore.title"               "" gfxconfig.set.str
@@ -1770,6 +1771,9 @@ config.welcome 0 eq or
 } {
   bsplash.show
 } ifelse
+
+config.menubackground findfile setimage
+54 452 image.size image
 
 % check for bi-arch config
 check_arch_boot_dir

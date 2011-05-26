@@ -216,7 +216,7 @@
 
   % center menu
   menu.start.x -1 eq {
-    /menu.start.x clip.size pop menu.bar.width sub 2 div 0 max def
+    /menu.start.x clip.size pop menu.bar.width menu.visible.entries mul sub 2 div 0 max def
   } if
 
   /x menu.start.x def
@@ -228,7 +228,7 @@
    y menu.text.yofs add moveto
    menu.texts exch menu.shift add get menuitemmap
    currentfont exch font.large setfont show.rtl setfont
-   /y y menu.item.height add def
+   /x x menu.bar.width add def
   } for
 
 } def
@@ -254,9 +254,9 @@
   /menu.idx over def
 
   menu.shift sub
-  menu.item.height mul menu.start.y add
-  menu.start.x exch
-  moveto
+  menu.bar.width mul menu.start.x add
+  /x exch def
+  x menu.start.y moveto
 
   currentpoint
   menu.status {
@@ -435,6 +435,15 @@
     pop 0
   } if
 
+  dup keyTab eq {
+    /boot.show true def
+
+    boot.drawlabels
+    bootoptions.redraw
+    pop 0
+  } if
+
+
   dup keyUp eq {
     menu.entry 0 gt {
       menu.entry false MenuSelect
@@ -454,32 +463,6 @@
         /menu.shift menu.shift 1 add def main.drawmenu
       } if
       /menu.entry menu.entry 1 add def
-      menu.entry true MenuSelect
-    } if
-    pop 0
-  } if
-
-  dup keyPgUp eq {
-    menu.entry 0 gt {
-      menu.entry false MenuSelect
-      /menu.entry 0 def
-      menu.shift 0 ne {
-        /menu.shift 0 def main.drawmenu
-      } if
-      menu.entry true MenuSelect
-    } if
-    pop 0
-  } if
-
-  dup keyPgDown eq {
-    menu.entry menu.texts length 1 sub lt {
-      menu.entry false MenuSelect
-      /menu.entry menu.texts length 1 sub def
-      menu.texts length menu.visible.entries sub dup menu.shift ne {
-        /menu.shift exch def main.drawmenu
-      } {
-        pop
-      } ifelse
       menu.entry true MenuSelect
     } if
     pop 0

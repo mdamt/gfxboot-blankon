@@ -8,7 +8,7 @@ BFLAGS = -O -v -L ../..
 
 all: bootlogo
 
-bootlogo: example_*.bc font
+bootlogo: example_*.bc 
 	@rm -rf $@.dir
 	@mkdir $@.dir
 	$(GFXBOOT_COMPILE) $(BFLAGS) -l $@.log -c $< $@.dir/init
