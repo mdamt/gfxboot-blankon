@@ -437,7 +437,7 @@
   config.addopt.lang {
     config.lang {
       config.lang.changed {
-        config.lang "lang=%s " bc.cmd dup length add sprintf
+        config.lang "locale=%s " bc.cmd dup length add sprintf
       } if
     } if
   } if
